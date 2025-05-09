@@ -1,0 +1,12 @@
+# Загрузка файлов
+Invoke-WebRequest -Uri "http://images.cocodataset.org/zips/train2017.zip" -OutFile "train2017.zip"
+Invoke-WebRequest -Uri "http://images.cocodataset.org/zips/val2017.zip" -OutFile "val2017.zip"
+Invoke-WebRequest -Uri "http://images.cocodataset.org/annotations/annotations_trainval2017.zip" -OutFile "annotations_trainval2017.zip"
+
+# Распаковка файлов (PowerShell 5.0+)
+Expand-Archive -Path "train2017.zip" -DestinationPath "train2017"
+Expand-Archive -Path "val2017.zip" -DestinationPath "val2017"
+Expand-Archive -Path "annotations_trainval2017.zip" -DestinationPath "annotations"
+
+# Загрузка coco.yaml, потом вручную скопировать в корневую папку каждого датасета коко
+wget https://github.com/ultralytics/ultralytics/blob/main/ultralytics/datasets/coco.yaml
